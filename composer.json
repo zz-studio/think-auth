@@ -1,6 +1,6 @@
 {
     "name": "zzstudio/think-auth",
-    "description": "The ThinkPHP5 Auth Package",
+    "description": "The ThinkPHP5.x Auth Package",
     "license": "Apache-2.0",
     "authors": [
         {
