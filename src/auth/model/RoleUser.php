@@ -37,4 +37,13 @@ class RoleUser extends Model
      * @var string|array
      */
     protected $pk = 'user_id';
+
+    /**
+     * 用户角色列表
+     * @return \think\model\relation\HasMany
+     */
+    public function rules()
+    {
+        return $this->hasMany(RoleRule::class, 'role_id', 'role_id');
+    }
 }

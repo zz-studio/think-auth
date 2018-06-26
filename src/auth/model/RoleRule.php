@@ -40,4 +40,18 @@ class RoleRule extends Model
      * @var string|array
      */
     protected $pk = 'role_id';
+    /**
+     * 追加一对一字段
+     * @var array
+     */
+    protected $append = ['rules'];
+
+    /**
+     * 角色规则表列
+     * @return $this
+     */
+    public function rules()
+    {
+        return $this->hasOne(Rule::class, 'id', 'rule_id')->bind(['name', 'title', 'type', 'condition', 'status']);
+    }
 }
