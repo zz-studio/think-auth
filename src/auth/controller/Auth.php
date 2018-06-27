@@ -128,6 +128,16 @@ class Auth
     }
 
     /**
+     * 获取用户所有角色 id
+     * @param $uid
+     * @return mixed
+     */
+    public function roles($uid)
+    {
+        return $this->app->model(RoleUser::class)->where(['user_id' => $uid])->column('role_id');
+    }
+
+    /**
      * 获得权限列表
      * @param integer $uid 用户id
      * @param integer $type

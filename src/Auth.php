@@ -30,6 +30,7 @@ use think\auth\controller\Auth AS Controller;
  * @package think
  * @method static check($name, $uid, $type = 1, $mode = 'url', $relation = 'or')
  * @method static rules($uid, $type = 1)
+ * @method static roles($uid)
  */
 class Auth
 {
