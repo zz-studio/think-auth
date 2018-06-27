@@ -24,6 +24,13 @@ namespace think;
 use think\facade\Config;
 use think\auth\controller\Auth AS Controller;
 
+/**
+ * auth 权限检测入口
+ * Class Auth
+ * @package think
+ * @method static check($name, $uid, $type = 1, $mode = 'url', $relation = 'or')
+ * @method static rules($uid, $type = 1)
+ */
 class Auth
 {
     /**
