@@ -116,6 +116,18 @@ class Auth
     }
 
     /**
+     * 返回用户的所有规则表
+     * @param int   $uid 认证用户的id
+     * @param int   $type 认证类型
+     * @return array
+     */
+    public function rules($uid, $type = 1)
+    {
+        // 获取用户需要验证的所有有效规则列表
+        return $this->getAuthList($uid, $type);
+    }
+
+    /**
      * 获得权限列表
      * @param integer $uid 用户id
      * @param integer $type
