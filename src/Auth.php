@@ -21,8 +21,6 @@
  */
 namespace think;
 
-use think\facade\Config;
-
 /**
  * auth 权限检测入口
  * Class Auth
