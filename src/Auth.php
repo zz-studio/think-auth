@@ -22,7 +22,6 @@
 namespace think;
 
 use think\facade\Config;
-use think\auth\controller\Auth AS Controller;
 
 /**
  * auth 权限检测入口
@@ -42,7 +41,7 @@ class Auth
      */
     public static function __callStatic($method, $args)
     {
-        $model = new Controller();
+        $model = new \think\auth\controller\Auth();
 
         return call_user_func_array([$model, $method], $args);
     }
