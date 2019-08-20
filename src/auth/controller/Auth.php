@@ -22,7 +22,8 @@
 
 namespace think\auth\controller;
 
-use think\Container;
+use think\App;
+use think\facade\Session;
 use think\facade\Config;
 use think\auth\model\RoleUser;
 
@@ -54,14 +55,21 @@ class Auth
      */
     public function __construct(App $app = null)
     {
-        $this->app = $app ?: Container::get('app');
-        $this->request = $this->app['request'];
         //可设置配置项 auth, 此配置项为数组。
-        if ($auth = Config::pull('auth')) {
-            $this->config = array_merge($this->config, $auth);
+        $config = Config::get();
+        if (isset($config['auth']) && is_array($config['auth'])) {
+            $this->config = array_merge($this->config, $config['auth']);
         }
+
+        $this->app = $app ?: app();
+        $this->request = $this->app['request'];
+
         // 初始化用户模型
-        $this->user = $this->app->model($this->config['auth_user']);
+        if (isset($this->app['think\Db'])) {
+            $this->user = $this->app['think\Db']->name($this->config['auth_user']);
+        } else if (function_exists('db')) {
+            $this->user = db($this->config['auth_user'], false);
+        }
     }
 
     /**
@@ -156,14 +164,14 @@ class Auth
             return Session::get('_auth_list_' . $uid . $t);
         }
 
-        $roles = $this->app->model(RoleUser::class)->with(['rules'])->where(['user_id' => $uid])->select();
+        $roles = RoleUser::with(['rules'])->where(['user_id' => $uid])->select();
         if (empty($roles)) {
             $_authList[$uid . $t] = [];
             return [];
         }
 
         $pk = $this->user->getPk();
-        $user = $this->user->where([$pk => $uid])->column('*');
+        $user = $this->user->where([$pk => $uid])->column('*', $pk);
         if (is_array($user) && isset($user[$uid])) {
             $user = $user[$uid];
         } else {
