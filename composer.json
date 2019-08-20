@@ -1,6 +1,6 @@
 {
     "name": "zzstudio/think-auth",
-    "description": "The ThinkPHP5.x Auth Package",
+    "description": "The ThinkPHP5+ Auth Package",
     "license": "Apache-2.0",
     "authors": [
         {
@@ -9,7 +9,7 @@
         }
     ],
     "require": {
-        "topthink/framework": "5.1.*"
+
     },
     "autoload": {
         "psr-4": {
