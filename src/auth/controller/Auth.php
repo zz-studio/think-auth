@@ -136,13 +136,22 @@ class Auth
     }
 
     /**
-     * 获取用户所有角色 id
+     * 获取用户所有角色信息
      * @param $uid
-     * @return mixed
+     * @param string $field
+     * @return array|false|mixed|\PDOStatement|string|\think\Collection
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\DbException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
      */
-    public function roles($uid)
+    public function roles($uid, $field = '')
     {
-        return $this->app->model(RoleUser::class)->where(['user_id' => $uid])->column('role_id');
+        $role = $this->app->model(RoleUser::class)->where(['user_id' => $uid]);
+        if (!empty($field)) {
+            return $role->column($field);
+        }
+        return $role->select();
     }
 
     /**
@@ -164,7 +173,7 @@ class Auth
             return Session::get('_auth_list_' . $uid . $t);
         }
 
-        $roles = RoleUser::with(['rules'])->where(['user_id' => $uid])->select();
+        $roles = $this->roles($uid);
         if (empty($roles)) {
             $_authList[$uid . $t] = [];
             return [];

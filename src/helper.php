@@ -35,3 +35,40 @@ if (!function_exists('auth_check')) {
         return \think\Auth::check($name, $uid, $type, $mode, $relation);
     }
 }
+
+if (!function_exists('get_auth_rules')) {
+    /**
+     * 返回用户的所有规则表
+     * @param int $uid 认证用户的id
+     * @param int $type 认证类型
+     * @return array
+     */
+    function get_auth_rules($uid, $type = 1)
+    {
+        return \think\Auth::rules($uid, $type);
+    }
+}
+
+if (!function_exists('get_auth_role_ids')) {
+    /**
+     * 获取用户所有角色 id
+     * @param $uid
+     * @return mixed
+     */
+    function get_auth_role_ids($uid)
+    {
+        return \think\Auth::roles($uid, 'role_id');
+    }
+}
+
+if (!function_exists('get_auth_roles')) {
+    /**
+     * 获取用户所有角色数据
+     * @param $uid
+     * @return mixed
+     */
+    function get_auth_roles($uid)
+    {
+        return \think\Auth::roles($uid);
+    }
+}
