@@ -20,8 +20,9 @@
  * +----------------------------------------------------------------------
  */
 
-namespace think\auth\controller;
+namespace think\auth\service;
 
+use think\Db;
 use think\App;
 use think\facade\Session;
 use think\facade\Config;
@@ -56,20 +57,16 @@ class Auth
     public function __construct(App $app = null)
     {
         //可设置配置项 auth, 此配置项为数组。
-        $config = Config::get();
-        if (isset($config['auth']) && is_array($config['auth'])) {
-            $this->config = array_merge($this->config, $config['auth']);
+        $config = Config::get('auth', []);
+        if (is_array($config)) {
+            $this->config = array_merge($this->config, $config);
         }
 
         $this->app = $app ?: app();
-        $this->request = $this->app['request'];
+        $this->request = $this->app->request;
 
         // 初始化用户模型
-        if (isset($this->app['think\Db'])) {
-            $this->user = $this->app['think\Db']->name($this->config['auth_user']);
-        } else if (function_exists('db')) {
-            $this->user = db($this->config['auth_user'], false);
-        }
+        $this->user = Db::name($this->config['auth_user']);
     }
 
     /**
@@ -147,7 +144,7 @@ class Auth
      */
     public function roles($uid, $field = '')
     {
-        $role = $this->app->model(RoleUser::class)->where(['user_id' => $uid]);
+        $role = RoleUser::where(['user_id' => $uid]);
         if (!empty($field)) {
             return $role->column($field);
         }

@@ -1,5 +1,5 @@
 # think-auth
-The ThinkPHP5.1 Auth Package
+The ThinkPHP6+ Auth Package
 
 ## 安装
 > composer require zzstudio/think-auth

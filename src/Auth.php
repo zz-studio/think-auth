@@ -39,7 +39,7 @@ class Auth
      */
     public static function __callStatic($method, $args)
     {
-        $model = new \think\auth\controller\Auth();
+        $model = new \think\auth\service\Auth(app());
 
         return call_user_func_array([$model, $method], $args);
     }
