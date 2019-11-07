@@ -3,12 +3,11 @@
  * +----------------------------------------------------------------------
  * | think-auth [thinkphp6]
  * +----------------------------------------------------------------------
- *  .--,       .--,             | FILE: Controller.php
- * ( (  \.---./  ) )            | AUTHOR: byron sampson
+ *  .--,       .--,             | FILE: config.php
+ * ( (  \.---./  ) )            | AUTHOR: byron
  *  '.__/o   o\__.'             | EMAIL: xiaobo.sun@qq.com
  *     {=  ^  =}                | QQ: 150093589
- *      >  -  <                 | WECHAT: wx5ini99
- *     /       \                | DATETIME: 2018/6/20
+ *     /       \                | DATETIME: 2019/11/7 15:51
  *    //       \\               |
  *   //|   .   |\\              |
  *   "'\       /'"_.-~^`'-.     |
@@ -16,22 +15,13 @@
  *    ___)( )(___               |-----------------------------------------
  *   (((__) (__)))              | 高山仰止,景行行止.虽不能至,心向往之。
  * +----------------------------------------------------------------------
- * | Copyright (c) 2017 http://www.zzstudio.net All rights reserved.
+ * | Copyright (c) 2019 http://www.zzstudio.net All rights reserved.
  * +----------------------------------------------------------------------
  */
 declare(strict_types=1);
 
-namespace think\auth\model;
-
-use think\Model;
-
-/**
- * 权限规则表
- * Class Rule
- * @package think\auth\model
- */
-class Rule extends Model
-{
-    // 表名
-    protected $name = "AuthRule";
-}
+return [
+    'auth_on'           => 1, // 权限开关
+    'auth_type'         => 1, // 认证方式，1为实时认证；2为登录认证。
+    'auth_user'         => 'member', // 用户信息不带前缀表名
+];

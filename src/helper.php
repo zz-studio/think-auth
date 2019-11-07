@@ -1,7 +1,7 @@
 <?php
 /**
  * +----------------------------------------------------------------------
- * | Zz-Admin
+ * | think-auth [thinkphp6]
  * +----------------------------------------------------------------------
  *  .--,       .--,             | FILE: Controller.php
  * ( (  \.---./  ) )            | AUTHOR: byron sampson
@@ -19,6 +19,13 @@
  * | Copyright (c) 2017 http://www.zzstudio.net All rights reserved.
  * +----------------------------------------------------------------------
  */
+declare(strict_types=1);
+
+\think\Console::starting(function (\think\Console $console) {
+    $console->addCommands([
+        'auth:config' => '\\think\\auth\\command\\SendConfig'
+    ]);
+});
 
 if (!function_exists('auth_check')) {
     /**

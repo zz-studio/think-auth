@@ -1,7 +1,7 @@
 <?php
 /**
  * +----------------------------------------------------------------------
- * | Zz-Admin
+ * | think-auth [thinkphp6]
  * +----------------------------------------------------------------------
  *  .--,       .--,             | FILE: Controller.php
  * ( (  \.---./  ) )            | AUTHOR: byron sampson
@@ -19,6 +19,8 @@
  * | Copyright (c) 2017 http://www.zzstudio.net All rights reserved.
  * +----------------------------------------------------------------------
  */
+declare(strict_types=1);
+
 namespace think\auth\model;
 
 use think\Model;
@@ -48,7 +50,7 @@ class RoleRule extends Model
 
     /**
      * 角色规则表列
-     * @return $this
+     * @return \think\model\relation\HasOne
      */
     public function rules()
     {

@@ -1,7 +1,7 @@
 <?php
 /**
  * +----------------------------------------------------------------------
- * | Zz-Admin
+ * | think-auth [thinkphp6]
  * +----------------------------------------------------------------------
  *  .--,       .--,             | FILE: Controller.php
  * ( (  \.---./  ) )            | AUTHOR: byron sampson
@@ -19,11 +19,12 @@
  * | Copyright (c) 2017 http://www.zzstudio.net All rights reserved.
  * +----------------------------------------------------------------------
  */
+declare(strict_types=1);
 
 namespace think\auth\model;
 
 use think\Model;
-use think\Db;
+use think\facade\Db;
 
 /**
  * 权限角色
@@ -42,7 +43,7 @@ class Role extends Model
     {
         // 编辑前事件
         self::event('before_update', function ($role) {
-            return model(RoleRule::class)->where(['role_id'=>$role->id])->delete();
+            return RoleRule::where(['role_id'=>$role->id])->delete();
         });
     }
 
@@ -68,12 +69,13 @@ class Role extends Model
 
     /**
      * 用户数
-     * @return int|string
+     * @return float|int|string
+     * @throws \think\Exception
      */
     protected function getUserNumAttr()
     {
         $role_id = $this->getData('id');
-        return model(RoleUser::class)->where(['role_id'=>$role_id])->count();
+        return RoleUser::where(['role_id'=>$role_id])->count();
     }
 
     /**

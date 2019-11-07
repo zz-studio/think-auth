@@ -1,7 +1,7 @@
 <?php
 /**
  * +----------------------------------------------------------------------
- * | Zz-Admin
+ * | think-auth [thinkphp6]
  * +----------------------------------------------------------------------
  *  .--,       .--,             | FILE: Controller.php
  * ( (  \.---./  ) )            | AUTHOR: byron sampson
@@ -19,11 +19,12 @@
  * | Copyright (c) 2017 http://www.zzstudio.net All rights reserved.
  * +----------------------------------------------------------------------
  */
+declare(strict_types=1);
 
 namespace think\auth\service;
 
-use think\Db;
 use think\App;
+use think\facade\Db;
 use think\facade\Session;
 use think\facade\Config;
 use think\auth\model\RoleUser;
@@ -124,7 +125,11 @@ class Auth
      * 返回用户的所有规则表
      * @param int   $uid 认证用户的id
      * @param int   $type 认证类型
-     * @return array
+     * @return array|mixed
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\DbException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
      */
     public function rules($uid, $type = 1)
     {
@@ -154,8 +159,12 @@ class Auth
     /**
      * 获得权限列表
      * @param integer $uid 用户id
-     * @param integer $type
-     * @return array
+     * @param $type
+     * @return array|mixed
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\DbException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
      */
     protected function getAuthList($uid, $type)
     {
