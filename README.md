@@ -5,6 +5,18 @@ The ThinkPHP6+ Auth Package
 > composer require zzstudio/think-auth
 
 ## 配置
+
+### 生成配置
+
+系统安装后会自动在 config 目录中生成 auth.php 的配置文件，
+如果系统未生成可在命令行执行
+
+```php
+php think auth:config 
+```
+
+快速生成配置文件
+
 ### 公共配置
 ```
 // auth配置
