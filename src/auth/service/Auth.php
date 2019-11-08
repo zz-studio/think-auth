@@ -78,6 +78,10 @@ class Auth
      * @param string $mode 执行check的模式
      * @param string $relation 如果为 'or' 表示满足任一条规则即通过验证;如果为 'and'则表示需满足所有规则才能通过验证
      * @return bool               通过验证返回true;失败返回false
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\DbException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
      */
     public function check($name, $uid, $type = 1, $mode = 'url', $relation = 'or')
     {

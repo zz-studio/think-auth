@@ -54,6 +54,6 @@ class RoleRule extends Model
      */
     public function rules()
     {
-        return $this->hasOne(Rule::class, 'id', 'rule_id')->bind(['name', 'title', 'type', 'condition', 'status']);
+        return $this->hasOne(Rule::class, 'id', 'rule_id')->bind(Rule::getTableFields());
     }
 }
