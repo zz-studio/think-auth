@@ -19,5 +19,12 @@
         "files": [
             "src/helper.php"
         ]
+    },
+    "extra": {
+        "think":{
+            "config":{
+                "auth": "src/config.php"
+            }
+        }
     }
 }
