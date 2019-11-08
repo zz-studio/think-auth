@@ -21,7 +21,7 @@
  */
 declare(strict_types=1);
 
-namespace think\glide\command;
+namespace think\auth\command;
 
 use think\console\Command;
 use think\console\Input;
