@@ -37,14 +37,11 @@ class Role extends Model
     protected $name = "AuthRole";
 
     /**
-     * 模型初始化
+     * 编辑前事件
      */
-    public static function init()
+    public static function onBeforeUpdate($role)
     {
-        // 编辑前事件
-        self::event('before_update', function ($role) {
-            return RoleRule::where(['role_id'=>$role->id])->delete();
-        });
+        return RoleRule::where(['role_id'=>$role->id])->delete();
     }
 
     /**
