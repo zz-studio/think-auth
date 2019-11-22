@@ -38,7 +38,7 @@ class RoleUser extends Model
      * 数据表主键 复合主键使用数组定义
      * @var string|array
      */
-    protected $pk = 'user_id';
+    protected $pk = 'role_id';
 
     /**
      * 用户角色列表
@@ -47,5 +47,14 @@ class RoleUser extends Model
     public function rules()
     {
         return $this->hasMany(RoleRule::class, 'role_id', 'role_id');
+    }
+
+    /**
+     * 关联角色
+     * @return \think\model\relation\HasOne
+     */
+    public function role()
+    {
+        return $this->hasOne(Role::class, 'id', 'role_id');
     }
 }

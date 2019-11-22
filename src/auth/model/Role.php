@@ -37,11 +37,14 @@ class Role extends Model
     protected $name = "AuthRole";
 
     /**
-     * 编辑前事件
+     * 删除角色时同时删除与规则，用户的关系数据
+     * @param \think\Model $user
+     * @throws \Exception
      */
-    public static function onBeforeUpdate($role)
+    public static function onAfterDelete($role)
     {
-        return RoleRule::where(['role_id'=>$role->id])->delete();
+        RoleRule::where(['role_id'=>$role->id])->delete();
+        RoleUser::where('role_id', $role->id)->delete();
     }
 
     /**
